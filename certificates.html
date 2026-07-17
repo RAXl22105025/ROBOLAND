@@ -160,25 +160,26 @@
         const certificateId = document.getElementById("certificateId").value;
         const result = document.getElementById("certificateResult");
 
-        try {
-            const response = await fetch('[https://roboland-backend.onrender.com/api/certificates](https://roboland-backend.onrender.com/api/certificates)/${certificateId}');
+       try {
+        // Notice the backticks (`) wrapping the URL instead of single quotes!
+        const response = await fetch(`https://roboland-backend.onrender.com/api/certificates/${certificateId}`);
+        
+        if (response.ok) {
+            const data = await response.json();
             
-            if (response.ok) {
-                const data = await response.json();
-                
-                document.getElementById("studentName").innerText = data.studentName;
-                document.getElementById("courseName").innerText = data.courseName;
-                document.getElementById("issueDate").innerText = data.issueDate;
-                
-                result.style.display = "block";
-            } else {
-                alert("Certificate not found!");
-                result.style.display = "none";
-            }
-        } catch (error) {
-            console.error("Error verifying certificate:", error);
-            alert("Could not connect to the verification server.");
+            document.getElementById("studentName").innerText = data.studentName;
+            document.getElementById("courseName").innerText = data.courseName;
+            document.getElementById("issueDate").innerText = data.issueDate;
+            
+            result.style.display = "block";
+        } else {
+            alert("Certificate not found!");
+            result.style.display = "none";
         }
+    } catch (error) {
+        console.error("Error verifying certificate:", error);
+        alert("Could not connect to the verification server.");
+    }
     }
 </script>
 
