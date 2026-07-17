@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>ROBOLAND | Register</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">🤖 ROBOLAND</div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
+
+</nav>
+
+<!-- REGISTER FORM -->
+
+<div class="form-container">
+
+    <h2>Create ROBOLAND Account</h2>
+
+    <form>
+
+        <input
+            type="text"
+            placeholder="Full Name"
+            required>
+
+        <input
+            type="email"
+            placeholder="Email Address"
+            required>
+
+        <input
+            type="text"
+            placeholder="Username"
+            required>
+
+        <input
+            type="password"
+            placeholder="Password"
+            required>
+
+        <input
+            type="password"
+            placeholder="Confirm Password"
+            required>
+
+        <select required>
+            <option value="">
+                Select Role
+            </option>
+
+            <option>
+                Student
+            </option>
+
+            <option>
+                Teacher
+            </option>
+
+            <option>
+                Admin
+            </option>
+        </select>
+
+        <button
+            type="submit"
+            class="btn">
+            Register
+        </button>
+
+    </form>
+
+    <br>
+
+    <p style="text-align:center;">
+        Already have an account?
+        <a href="login.html" style="color:#00e5ff;">
+            Login Here
+        </a>
+    </p>
+
+</div>
+
+<footer>
+
+    <p>
+        © 2026 ROBOLAND. All Rights Reserved.
+    </p>
+
+</footer>
+```
+
+</body><script>
+    document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevents the page from refreshing
+
+        // Grab the input fields based on their order in your HTML
+        const inputs = document.querySelectorAll('input');
+        const fullName = inputs[0].value;
+        const email = inputs[1].value;
+        const username = inputs[2].value;
+        const password = inputs[3].value;
+        const confirmPassword = inputs[4].value;
+        const role = document.querySelector('select').value;
+
+        // Simple validation
+        if (password !== confirmPassword) {
+            return alert("Passwords do not match!");
+        }
+        if (role === "") {
+            return alert("Please select a role.");
+        }
+
+        // Send data to the backend
+        try {
+            const response = await fetch('[https://roboland-backend.onrender.com/api/register](https://roboland-backend.onrender.com/api/register)', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ fullName, email, username, password, role })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert("Registration successful! Please login.");
+                window.location.href = "login.html"; // Redirect to your login page
+            } else {
+                alert("Error: " + data.error);
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+            alert("Cannot reach the server. Is it running?");
+        }
+    });
+</script>
+
+
+
+</html>

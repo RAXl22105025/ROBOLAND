@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>ROBOLAND | Certificate Verification</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">🤖 ROBOLAND</div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+
+</nav>
+
+<!-- PAGE HEADER -->
+
+<section>
+
+    <h1 class="section-title">
+        Certificate Verification
+    </h1>
+
+    <p style="text-align:center;">
+        Verify ROBOLAND certificates using a Certificate ID.
+    </p>
+
+</section>
+
+<!-- VERIFICATION FORM -->
+
+<section>
+
+    <div class="form-container">
+
+        <h2>Verify Certificate</h2>
+
+        <input
+            type="text"
+            id="certificateId"
+            placeholder="Enter Certificate ID">
+
+        <button
+            class="btn"
+            onclick="verifyCertificate()">
+            Verify Certificate
+        </button>
+
+    </div>
+
+</section>
+
+<!-- RESULT -->
+
+<section>
+
+    <div
+        class="card"
+        id="certificateResult"
+        style="display:none;">
+
+        <h2 style="color:#00e5ff;">
+            Certificate Verified
+        </h2>
+
+        <br>
+
+        <p>
+            <strong>Name:</strong>
+            <span id="studentName"></span>
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Course:</strong>
+            <span id="courseName"></span>
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Issue Date:</strong>
+            <span id="issueDate"></span>
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Status:</strong>
+            Valid Certificate ✅
+        </p>
+
+    </div>
+
+</section>
+
+<!-- SAMPLE CERTIFICATES -->
+
+<section>
+
+    <h2 class="section-title">
+        Sample Certificate IDs
+    </h2>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>RB-2026-001</h3>
+            <p>Robotics Fundamentals</p>
+        </div>
+
+        <div class="card">
+            <h3>RB-2026-002</h3>
+            <p>Artificial Intelligence Basics</p>
+        </div>
+
+        <div class="card">
+            <h3>RB-2026-003</h3>
+            <p>Linux Essentials</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 ROBOLAND. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+    async function verifyCertificate() {
+        const certificateId = document.getElementById("certificateId").value;
+        const result = document.getElementById("certificateResult");
+
+        try {
+            const response = await fetch('[https://roboland-backend.onrender.com/api/certificates](https://roboland-backend.onrender.com/api/certificates)/${certificateId}');
+            
+            if (response.ok) {
+                const data = await response.json();
+                
+                document.getElementById("studentName").innerText = data.studentName;
+                document.getElementById("courseName").innerText = data.courseName;
+                document.getElementById("issueDate").innerText = data.issueDate;
+                
+                result.style.display = "block";
+            } else {
+                alert("Certificate not found!");
+                result.style.display = "none";
+            }
+        } catch (error) {
+            console.error("Error verifying certificate:", error);
+            alert("Could not connect to the verification server.");
+        }
+    }
+</script>
+
+</body>
+
+
+
+
+</html>
