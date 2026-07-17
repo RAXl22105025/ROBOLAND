@@ -1,8 +1,4 @@
-// ==============================
-// ROBOLAND AI CHATBOT
-// ==============================
-
-function sendMessage() {
+async function sendMessage() {
     const userInput = document.getElementById('userInput');
     const chatBox = document.getElementById('chatBox');
     const text = userInput.value.trim();
@@ -15,56 +11,54 @@ function sendMessage() {
     userMessage.innerText = text;
     chatBox.appendChild(userMessage);
 
-    // Clear input field and scroll down immediately
     userInput.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 2. Show "Typing..." Indicator
+    // 2. Show "Thinking..." Indicator
     const typingIndicator = document.createElement('div');
     typingIndicator.className = 'bot-msg';
     typingIndicator.style.fontStyle = 'italic';
     typingIndicator.style.opacity = '0.7';
-    typingIndicator.innerText = 'ROBOLAND AI is typing...';
+    typingIndicator.innerText = 'ROBOLAND AI is thinking...';
     chatBox.appendChild(typingIndicator);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 3. Determine the Bot's Response
-    let response = 'I am ROBOLAND AI.';
-    const lower = text.toLowerCase();
+    // 3. Ask the Backend (which asks OpenAI)
+    try {
+        const response = await fetch('https://roboland-backend.onrender.com/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: text })
+        });
 
-    if (lower.includes('hello') || lower.includes('hi')) {
-        response = 'Hello! Welcome to ROBOLAND 🚀';
-    } else if (lower.includes('robot')) {
-        response = 'Robotics combines sensors, controllers and actuators to perform tasks automatically.';
-    } else if (lower.includes('arduino')) {
-        response = 'Arduino is an open-source microcontroller platform widely used in robotics and IoT projects.';
-    } else if (lower.includes('linux')) {
-        response = 'Linux is a powerful open-source operating system used by developers and engineers worldwide.';
-    } else if (lower.includes('ai') || lower.includes('artificial intelligence')) {
-        response = 'Artificial Intelligence enables machines to learn, reason and make decisions.';
-    } else if (lower.includes('project')) {
-        response = 'ROBOLAND offers projects in Robotics, AI, Linux, Electronics and IoT.';
-    } else {
-        response = 'Interesting question. ROBOLAND AI is still learning, but I am here to help you build amazing things!';
-    }
-
-    // 4. Replace Typing Indicator with Real Response after a delay
-    setTimeout(() => {
-        // Remove the "typing..." message
+        const data = await response.json();
+        
+        // Remove the typing indicator
         chatBox.removeChild(typingIndicator);
 
-        // Add the real bot message
+        // 4. Show the AI's real response
         const botMessage = document.createElement('div');
         botMessage.className = 'bot-msg';
-        botMessage.innerText = response;
+        
+        if (response.ok) {
+            botMessage.innerText = data.reply;
+        } else {
+            botMessage.innerText = "Error: " + data.error;
+        }
+        
         chatBox.appendChild(botMessage);
-
-        // Scroll to the bottom again
         chatBox.scrollTop = chatBox.scrollHeight;
-    }, 1000); // 1 second delay feels a bit more natural
+
+    } catch (error) {
+        chatBox.removeChild(typingIndicator);
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'bot-msg';
+        errorMsg.innerText = "Cannot reach the server. Is it awake?";
+        chatBox.appendChild(errorMsg);
+    }
 }
 
-// 5. Allow user to press "Enter" on their keyboard to send
+// Allow Enter key to send
 document.getElementById('userInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         sendMessage();
