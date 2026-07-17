@@ -1,204 +1,89 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-```
-<title>ROBOLAND | Student Dashboard</title>
-
-<link rel="stylesheet" href="style.css">
-```
-
+    <title>ROBOLAND | My Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-```
-<!-- NAVBAR -->
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">🤖 ROBOLAND</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="dashboard.html" style="color: var(--primary);">Dashboard</a></li>
+            <li><a href="certificates.html">Certificates</a></li>
+            <!-- We will replace the Login link with a Logout button in the dashboard! -->
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
 
-<nav class="navbar">
+    <!-- DASHBOARD HEADER -->
+    <section>
+        <h1 id="welcomeMessage" class="section-title" style="margin-bottom: 20px;">
+            Loading Dashboard...
+        </h1>
+        <p style="text-align:center; margin-bottom: 50px;">
+            Welcome to your personal ROBOLAND command center.
+        </p>
 
-    <div class="logo">🤖 ROBOLAND</div>
+        <!-- DASHBOARD GRID -->
+        <div class="dashboard-grid">
+            <div class="card">
+                <h2 style="font-size: 3rem;">📚</h2>
+                <h3>My Courses</h3>
+                <p>Pick up where you left off in Robotics Fundamentals.</p>
+                <br>
+                <a href="#" class="btn" style="padding: 10px 20px;">Resume</a>
+            </div>
 
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="register.html">Register</a></li>
-    </ul>
+            <div class="card">
+                <h2 style="font-size: 3rem;">🏆</h2>
+                <h3>My Certificates</h3>
+                <p>View and verify your earned ROBOLAND certificates.</p>
+                <br>
+                <a href="certificates.html" class="btn" style="padding: 10px 20px;">View</a>
+            </div>
 
-</nav>
-
-<!-- PAGE TITLE -->
-
-<section>
-
-    <h1 class="section-title">
-        Student Dashboard
-    </h1>
-
-    <p style="text-align:center;">
-        Welcome back to ROBOLAND.
-    </p>
-
-</section>
-
-<!-- DASHBOARD STATS -->
-
-<section>
-
-    <div class="dashboard-grid">
-
-        <div class="card">
-            <h2>12</h2>
-            <p>Projects Completed</p>
+            <div class="card">
+                <h2 style="font-size: 3rem;">⚙️</h2>
+                <h3>Settings</h3>
+                <p>Update your profile, password, and account preferences.</p>
+                <br>
+                <a href="#" class="btn" style="padding: 10px 20px;">Edit Profile</a>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <h2>5</h2>
-            <p>Certificates Earned</p>
-        </div>
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 ROBOLAND. All Rights Reserved.</p>
+    </footer>
 
-        <div class="card">
-            <h2>37</h2>
-            <p>AI Conversations</p>
-        </div>
+    <!-- DASHBOARD LOGIC -->
+    <script>
+        // 1. Check if the user is logged in
+        const loggedInUser = localStorage.getItem('robolandUser');
 
-        <div class="card">
-            <h2>8</h2>
-            <p>Courses Joined</p>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- QUICK ACTIONS -->
-
-<section>
-
-    <h2 class="section-title">
-        Quick Actions
-    </h2>
-
-    <div class="grid">
-
-        <div class="card">
-
-            <h3>📚 My Courses</h3>
-
-            <br>
-
-            <p>
-                Continue your robotics and AI learning.
-            </p>
-
-            <br>
-
-            <button class="btn">
-                Open
-            </button>
-
-        </div>
-
-        <div class="card">
-
-            <h3>🤖 AI Assistant</h3>
-
-            <br>
-
-            <p>
-                Ask questions and get instant help.
-            </p>
-
-            <br>
-
-            <button class="btn">
-                Open
-            </button>
-
-        </div>
-
-        <div class="card">
-
-            <h3>🏆 Certificates</h3>
-
-            <br>
-
-            <p>
-                View and download your certificates.
-            </p>
-
-            <br>
-
-            <button class="btn">
-                Open
-            </button>
-
-        </div>
-
-        <div class="card">
-
-            <h3>🚀 Projects</h3>
-
-            <br>
-
-            <p>
-                Manage your submitted projects.
-            </p>
-
-            <br>
-
-            <button class="btn">
-                Open
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- RECENT ACTIVITY -->
-
-<section>
-
-    <h2 class="section-title">
-        Recent Activity
-    </h2>
-
-    <div class="card">
-
-        <p>✅ Completed Arduino Basics Course</p>
-        <br>
-
-        <p>✅ Earned Robotics Fundamentals Certificate</p>
-        <br>
-
-        <p>✅ Submitted Smart Car Health Monitor Project</p>
-        <br>
-
-        <p>✅ Used ROBOLAND AI Assistant</p>
-
-    </div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-    <p>
-        © 2026 ROBOLAND. All Rights Reserved.
-    </p>
-
-</footer>
-```
+        if (loggedInUser) {
+            // 2. If they are, update the title to greet them by name!
+            document.getElementById('welcomeMessage').innerText = `Welcome back, ${loggedInUser}!`;
+        } else {
+            // 3. If they are NOT logged in, kick them out to the login page
+            alert("Security Alert: Please log in to view your dashboard.");
+            window.location.href = "login.html";
+        }
+        
+        // 4. The Logout function
+        function logout() {
+            localStorage.removeItem('robolandUser'); // Delete the saved name
+            alert("You have been successfully logged out.");
+            window.location.href = "index.html"; // Send them back to the home page
+        }
+    </script>
 
 </body>
-
 </html>
