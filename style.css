@@ -265,22 +265,11 @@ CARDS
 ========================== */
 
 .card{
-
-```
-background:var(--card);
-
-padding:25px;
-
-border-radius:20px;
-
-border:1px solid var(--border);
-
-transition:.4s;
-
-opacity:0;
-transform:translateY(30px);
-```
-
+    background:var(--card);
+    padding:25px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    transition:.4s;
 }
 
 .card.show{
