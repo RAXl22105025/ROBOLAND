@@ -170,7 +170,7 @@ Areas of Interest:
 ---
 
 ### Soumaya Bhowmik
-**Co-Founder & Tech Lead**
+**Co-Founder & CTO**
 
 Responsible for technical strategy, development planning, software architecture, and innovation initiatives within ROBOLAND.
 
@@ -186,7 +186,7 @@ Areas of Interest:
 ---
 
 ### Adrita Nayak
-**Co-Founder & Managing Director (MD)**
+**Co-Founder & COO**
 
 Responsible for organizational management, operations, growth strategy, partnerships, and overall project coordination.
 
