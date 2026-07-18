@@ -14,105 +14,53 @@
 
 </head>
 
-<body>
+<body class="auth-body">
 
-```
-<!-- NAVBAR -->
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">🤖 ROBOLAND</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
 
-<nav class="navbar">
+    <!-- REGISTER FORM -->
+    <div class="auth-container">
+        <h2>Create account</h2>
+        <p>Join the ROBOLAND community</p>
 
-    <div class="logo">🤖 ROBOLAND</div>
+        <form>
+            <input type="text" class="auth-input" placeholder="Full Name" required>
+            <input type="email" class="auth-input" placeholder="Email Address" required>
+            <input type="text" class="auth-input" placeholder="Username" required>
+            <input type="password" class="auth-input" placeholder="Password" required>
+            <input type="password" class="auth-input" placeholder="Confirm Password" required>
+            
+            <select class="auth-input" required>
+    <option value="">Select Role</option>
+    <option value="Student">Student</option>
+    <option value="Teacher">Teacher</option>
+</select>
 
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="register.html">Register</a></li>
-    </ul>
+            <button type="submit" class="auth-btn">Register</button>
+        </form>
 
-</nav>
+        <br>
+        <p style="text-align:center; color: #5f6368; font-size: 14px;">
+            Already have an account?
+            <a href="login.html" style="color:#1a73e8; text-decoration: none;">
+                Login Here
+            </a>
+        </p>
+    </div>
 
-<!-- REGISTER FORM -->
+    <footer>
+        <p>© 2026 ROBOLAND. All Rights Reserved.</p>
+    </footer>
 
-<div class="form-container">
-
-    <h2>Create ROBOLAND Account</h2>
-
-    <form>
-
-        <input
-            type="text"
-            placeholder="Full Name"
-            required>
-
-        <input
-            type="email"
-            placeholder="Email Address"
-            required>
-
-        <input
-            type="text"
-            placeholder="Username"
-            required>
-
-        <input
-            type="password"
-            placeholder="Password"
-            required>
-
-        <input
-            type="password"
-            placeholder="Confirm Password"
-            required>
-
-        <select required>
-            <option value="">
-                Select Role
-            </option>
-
-            <option>
-                Student
-            </option>
-
-            <option>
-                Teacher
-            </option>
-
-            <option>
-                Admin
-            </option>
-        </select>
-
-        <button
-            type="submit"
-            class="btn">
-            Register
-        </button>
-
-    </form>
-
-    <br>
-
-    <p style="text-align:center;">
-        Already have an account?
-        <a href="login.html" style="color:#00e5ff;">
-            Login Here
-        </a>
-    </p>
-
-</div>
-
-<footer>
-
-    <p>
-        © 2026 ROBOLAND. All Rights Reserved.
-    </p>
-
-</footer>
-```
-
-</body><script>
+</body>
+    <script>
     document.querySelector('form').addEventListener('submit', async (e) => {
         e.preventDefault(); // Prevents the page from refreshing
 
