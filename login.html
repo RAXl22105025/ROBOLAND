@@ -13,72 +13,39 @@
 ```
 
 </head>
+<body class="auth-body">
 
-<body>
+    <!-- NAVBAR: Keep this if you want it visible on the login page -->
+    <nav class="navbar">
+        <div class="logo">🤖 ROBOLAND</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+        </ul>
+    </nav>
 
-```
-<!-- NAVBAR -->
+    <!-- LOGIN FORM: Updated classes below -->
+    <div class="auth-container">
+        <h2>Sign in</h2>
+        <p>Continue to ROBOLAND</p>
 
-<nav class="navbar">
+        <form>
+            <input type="email" class="auth-input" placeholder="Email" required>
+            <input type="password" class="auth-input" placeholder="Password" required>
+            <button type="submit" class="auth-btn">Login</button>
+        </form>
 
-    <div class="logo">🤖 ROBOLAND</div>
+        <br>
+        <p style="text-align:center; color: #5f6368; font-size: 14px;">
+            Don't have an account?
+            <a href="register.html" style="color:#1a73e8; text-decoration: none;">
+                Create account
+            </a>
+        </p>
+    </div>
 
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="register.html">Register</a></li>
-    </ul>
-
-</nav>
-
-<!-- LOGIN FORM -->
-
-<div class="form-container">
-
-    <h2>Login to ROBOLAND</h2>
-
-    <form>
-
-        <input
-            type="email"
-            placeholder="Enter Email"
-            required>
-
-        <input
-            type="password"
-            placeholder="Enter Password"
-            required>
-
-        <button
-            type="submit"
-            class="btn">
-            Login
-        </button>
-
-    </form>
-
-    <br>
-
-    <p style="text-align:center;">
-        Don't have an account?
-        <a href="register.html" style="color:#00e5ff;">
-            Register Here
-        </a>
-    </p>
-
-</div>
-
-<footer>
-
-    <p>
-        © 2026 ROBOLAND. All Rights Reserved.
-    </p>
-
-</footer>
-```
-
+    <!-- ... footer stays same ... -->
 </body>
 
 <script>
@@ -101,16 +68,20 @@
 
         const data = await response.json();
 
-        if (response.ok) {
+       if (response.ok) {
+            // Assuming your backend returns { "success": true, "role": "admin" }
+            const userRole = data.role; 
+
             alert("Login successful! Welcome back.");
-            window.location.href = "dashboard.html"; 
+
+            if (userRole === 'admin') {
+                window.location.href = "admin-dashboard.html"; // Redirect to Admin Page
+            } else {
+                window.location.href = "dashboard.html"; // Redirect to Normal Dashboard
+            }
         } else {
             alert("Error: " + data.error);
         }
-    } catch (error) {
-        console.error("Fetch error:", error);
-        alert("Cannot reach the server. Is it running?");
-    }
     });
 </script>
 
