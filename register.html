@@ -1,32 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-```
-<title>ROBOLAND | Register</title>
-
-<link rel="stylesheet" href="style.css">
-```
-
+    <title>ROBOLAND | Create Account</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body class="auth-body">
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="logo">🤖 ROBOLAND</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
 
     <!-- REGISTER FORM -->
     <div class="auth-container">
+        <div style="font-weight: 800; color: var(--primary); font-size: 24px; margin-bottom: 20px;">🤖 ROBOLAND</div>
+        
         <h2>Create account</h2>
         <p>Join the ROBOLAND community</p>
 
@@ -38,74 +23,63 @@
             <input type="password" class="auth-input" placeholder="Confirm Password" required>
             
             <select class="auth-input" required>
-    <option value="">Select Role</option>
-    <option value="Student">Student</option>
-    <option value="Teacher">Teacher</option>
-</select>
+                <option value="">Select Role</option>
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+            </select>
 
-            <button type="submit" class="auth-btn">Register</button>
+            <button type="submit" class="auth-btn" style="background-color: var(--primary); color: black;">Register</button>
         </form>
 
-        <br>
-        <p style="text-align:center; color: #5f6368; font-size: 14px;">
-            Already have an account?
-            <a href="login.html" style="color:#1a73e8; text-decoration: none;">
-                Login Here
-            </a>
+        <p style="margin-top: 25px; font-size: 14px;">
+            Already have an account? 
+            <a href="login.html" style="color:#1a73e8; text-decoration: none;">Login Here</a>
+        </p>
+
+        <p style="margin-top: 15px; font-size: 14px;">
+            <a href="index.html" style="color:#666; text-decoration: none;">← Back to Home</a>
         </p>
     </div>
 
-    <footer>
-        <p>© 2026 ROBOLAND. All Rights Reserved.</p>
-    </footer>
-
-</body>
     <script>
-    document.querySelector('form').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Prevents the page from refreshing
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        // Grab the input fields based on their order in your HTML
-        const inputs = document.querySelectorAll('input');
-        const fullName = inputs[0].value;
-        const email = inputs[1].value;
-        const username = inputs[2].value;
-        const password = inputs[3].value;
-        const confirmPassword = inputs[4].value;
-        const role = document.querySelector('select').value;
+            const inputs = document.querySelectorAll('input');
+            const fullName = inputs[0].value;
+            const email = inputs[1].value;
+            const username = inputs[2].value;
+            const password = inputs[3].value;
+            const confirmPassword = inputs[4].value;
+            const role = document.querySelector('select').value;
 
-        // Simple validation
-        if (password !== confirmPassword) {
-            return alert("Passwords do not match!");
-        }
-        if (role === "") {
-            return alert("Please select a role.");
-        }
+            if (password !== confirmPassword) {
+                return alert("Passwords do not match!");
+            }
+            if (role === "") {
+                return alert("Please select a role.");
+            }
 
-      // Send data to the backend
-    try {
-        const response = await fetch('https://roboland-backend.onrender.com/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ fullName, email, username, password, role })
+            try {
+                const response = await fetch('https://roboland-backend.onrender.com/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, email, username, password, role })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("Registration successful! Please login.");
+                    window.location.href = "login.html";
+                } else {
+                    alert("Error: " + data.error);
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+                alert("Cannot reach the server.");
+            }
         });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            alert("Registration successful! Please login.");
-            window.location.href = "login.html"; // Redirect to your login page
-        } else {
-            alert("Error: " + data.error);
-        }
-    } catch (error) {
-        console.error("Fetch error:", error);
-        alert("Cannot reach the server. Is it running?");
-    }
-    });
-</script>
-
-
-
+    </script>
+</body>
 </html>
