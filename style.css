@@ -671,3 +671,72 @@ section{
 ```
 
 }
+
+/* ==========================
+AUTH PAGES (Google-Style)
+========================== */
+
+.auth-body {
+    background-color: #f0f2f5 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.auth-container {
+    background: #ffffff;
+    padding: 48px 40px 36px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    color: #202124;
+}
+
+.auth-container h2 {
+    color: #202124;
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.auth-container p {
+    color: #5f6368;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 13px 15px;
+    margin: 10px 0;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #000;
+}
+
+.auth-input:focus {
+    outline: none;
+    border: 2px solid #1a73e8;
+}
+
+.auth-btn {
+    width: 100%;
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.auth-btn:hover {
+    background-color: #1557b0;
+}
